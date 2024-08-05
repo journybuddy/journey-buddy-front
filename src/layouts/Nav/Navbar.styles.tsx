@@ -2,6 +2,7 @@
 
 import styled from "@emotion/styled";
 import { Avatar } from 'antd';
+import { NavLink } from 'react-router-dom';
 
 export const NavbarWrap = styled.div`
     display: flex;
@@ -20,7 +21,7 @@ export const LogoWrap = styled.div`
     align-items: center;
     margin-left: 20px;
     svg {
-        margin : 0px;
+        margin: 0px;
     }
 `;
 
@@ -31,7 +32,7 @@ export const NavItems = styled.div`
     justify-content: center;
 `;
 
-export const NavItemWrap = styled.div`
+export const NavItemWrap = styled(NavLink)`
     font-family: 'GmarketSansMedium';
     display: flex;
     align-items: center;
@@ -39,6 +40,7 @@ export const NavItemWrap = styled.div`
     color: #333;
     font-size: 16px;
     cursor: pointer;
+    text-decoration: none;
     
     &.active {
         background-color: white;
@@ -46,7 +48,7 @@ export const NavItemWrap = styled.div`
         border-radius: 5px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
-  
+    
     .icon {
         margin-right: 5px;
     }
