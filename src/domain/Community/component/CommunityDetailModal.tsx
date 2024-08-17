@@ -1,90 +1,30 @@
 import React from 'react';
-
-import Modal from "../../../components/Modal/Modal";
+import InfoModal from "../../../components/Modal/InfoModal";
 import useModal from "../../../hooks/useModal";
+import { useCommunityDetail } from '../hooks/useCommunityDetail';
 
-export default function CommunityDetailModal() {
-    const { isOpen, onClose } = useModal();
+interface IProps {
+  postId?: number;
+}
+
+export default function CommunityDetailModal({ postId }: IProps) {
+  const { isOpen, onClose } = useModal();
+  const { communityDetail, isLoading, error } = useCommunityDetail(postId);
 
   return (
-    <Modal
+    <InfoModal
       open={isOpen}
       onClose={onClose}
-      onOk={onClose}
-      title="Detail"
-      okText="등록"
-    >
-      '2시간이 채 걸리지 않아 가벼운 주말 여행지로 각광받고 있는 나고야. 그중에서도 최근 SNS에서 떠오르고 있는 테마 여행인 나고야 먹방 여행! 그만큼 나고야는 다소 작은 도시이긴 하지만 맛집이 많기로 유명한 도시랍니다. 히츠마부시, 데바사키 등 꼭 먹어봐야 할 음식을 포함한 다양한 맛집을 소개해드릴게요.
-
-1
-세카이노야마짱
-세카이노야마짱
-추천:
-커플
-가족
-음식
-나고야 3대 별미 중 하나인 닭 날개 튀김으로 유명한 곳이에요. 체인점이라 여러 곳에서 만나볼 수 있지만 어느 지점이나 저녁에는 맥주 한 잔 하는 사람들로 붐비는 곳이랍니다. 간장을 기본 베이스로 한 ‘데바사키’가 베스트 메뉴에요. 현지인들에게 인기 있는 곳이지만 한국인의 입맛에도 딱 맞는 맛이니 나고야에 방문했다면 꼭 들려보세요.
-주소: 일본 〒460-0003 Aichi, Nagoya, Naka Ward, Nishiki, 3 Chome−15−1 ユース栄宮地ビル２・３Ｆ
-
-운영 시간: 월 ~ 토 17:00 ~ 03:15 (라스트 오더 02:30), 일 17:00 ~ 00:15 (라스트 오더 23:30)
-
-지도
-사진 제공: Dongwoo Kim (CC BY-SA 2.0) 수정됨
-
-2
-시라카와
-시라카와
-추천:
-커플
-가족
-사진
-나고야의 3대 히츠마부시 맛집이에요. 히츠마부시는 밥 위에 장어를 올린 장어덮밥인데요. 히츠마부시를 맛있게 먹기 위해서는 우선 히츠마부시를 1/4등분 한 뒤 처음엔 장어덮밥 그대로 먹고, 두 번째는 김, 파, 고추냉이를 넣어 섞어 먹고, 세 번째는 차를 넣어 오차즈케로 먹고, 마지막엔 이 중에서 가장 맛있었던 방법으로 먹으면 됩니다. 시라카와는 인기가 많은 가게인 만큼 대기를 감안하시고, 예약도 가능하니 참고해서 방문해보세요.
-주소: 4-30-3 Josai, Nishi Ward, Nagoya, Aichi 451-0031 일본
-
-운영 시간: 월 ~ 토 17:00 ~ 03:15 (라스트 오더 02:30), 일 17:00 ~ 00:15 (라스트 오더 23:30)
-
-지도
-사진 제공: Dongwoo Kim (CC BY-SA 2.0) 수정됨
-
-기타 관련 스토리
-나고야 맛집 베스트 5
-나고야 맛집 베스트 5
-일본
-나고야에서 가장 핫한 바 베스트 7
-나고야에서 가장 핫한 바 베스트 7
-일본
-나고야 쇼핑 명소 베스트 10
-나고야 쇼핑 명소 베스트 10
-일본
-3
-카페 드 씨엘
-카페 드 씨엘
-추천:
-커플
-가족
-음식
-카페 드 씨엘은 나고야역 다카시마야 백화점 51층에 위치해 있어 나고야의 전망을 감상하기 좋은 카페예요. 굳이 전망대를 가지 않아도 창가 자리에 앉으면 나고야 시내를 내려다보며 휴식을 취할 수 있어서 인기가 많은 곳입니다. 음료와 브런치, 디저트류의 평도 훌륭한 편이에요.
-주소: 일본 〒450-6051 Aichi, Nagoya, Nakamura Ward, Meieki, 1 Chome−1−4 ジェイアール名古屋タカシマヤ ５１Ｆ
-
-운영 시간: 매일 10:00 ~ 21:30
-
-지도
-사진 제공: Dongwoo Kim (CC BY-SA 2.0) 수정됨
-
-4
-니기리노도쿠베
-니기리노도쿠베
-추천:
-커플
-가족
-음식
-일본에 갔으면 꼭 즐겨야 하는 스시! 오아시스 21 내에 위치한 회전 초밥 맛집이에요. 현지인에게도 관광객에게도 맛집으로 소문난 곳이라 식사 시간에는 웨이팅이 끊이지 않아요. 테이블마다 태블릿이 설치되어 있고 한국어도 지원하고 있어서 편하게 주문할 수 있어요. 퀄리티는 좋고 가격은 저렴한 곳이랍니다.
-주소: 1 Chome-11-1 Higashisakura, Higashi Ward, Nagoya, Aichi 461-0005 일본
-
-운영 시간: 매일 11:00 ~ 22:00
-
-지도
-사진 제공: Dongwoo Kim (CC BY-SA 2.0) 수정됨
-    </Modal>
+      title={communityDetail?.title}
+      content={communityDetail?.content}
+      detailText={[
+        `Location: ${communityDetail?.location}`,
+        `Author: ${communityDetail?.writer}`,
+        `Created At: ${new Date(communityDetail?.createdAt).toLocaleString()}`,
+        `Likes: ${communityDetail?.likeCount}`,
+        `Comments: ${communityDetail?.commentCount}`,
+      ]}
+      imageUrlList={communityDetail?.imageUrlList}
+    />
   );
 }

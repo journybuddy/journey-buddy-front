@@ -2,7 +2,7 @@ import { User } from '../types/interface/User';
 
 const USER_LOCALSTORAGE_KEY = 'user';
 
-export function getStoredUser(): User | null {
+export function getStoredUser(): string | null {
 	const storedUser = localStorage.getItem(USER_LOCALSTORAGE_KEY);
 	return storedUser ? JSON.parse(storedUser) : null;
 }

@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
-		const token = getStoredUser()?.accessToken;
+		const token = getStoredUser();
 		if (token) {
 			config.headers = config.headers || {};
 			config.headers['Authorization'] = token;

@@ -7,6 +7,7 @@ import ModalPortal from './ModalPortal';
 interface IProps {
 	children: ReactNode;
 	open?: boolean;
+	show?: boolean;
 	onClose?: () => void;
 	width?: string;
 }
@@ -14,12 +15,13 @@ interface IProps {
 export default function ModalLayout({
 	children,
 	open,
+	show, 
 	onClose,
 	width = '720px',
 }: IProps) {
 	return open ? (
 		<ModalPortal>
-			<S.ModalWrap onClick={onClose}>
+			<S.ModalWrap show={show} onClick={onClose}>
 				<S.ModalContainer>
 					<S.ModalInner width={width}>
 						<S.ModalContent onClick={(e) => e.stopPropagation()}>

@@ -1,5 +1,52 @@
 import styled from '@emotion/styled';
 
+export const Title = styled.h2`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+`;
+
+export const Content = styled.p`
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+export const DetailText = styled.p`
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-align: left;
+`;
+
+export const ImageCarousel = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  gap: 10px;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+`;
+
 export const ModalWrap = styled.div<{ show?: boolean }>`
 	position: fixed;
 	top: 0;
@@ -7,8 +54,9 @@ export const ModalWrap = styled.div<{ show?: boolean }>`
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
+	z-index:  ${({ show }) => (show ? '1000' : '1200' )};
 `;
+
 
 export const ModalContainer = styled.div`
 	bottom: 0;

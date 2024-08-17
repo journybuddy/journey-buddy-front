@@ -15,7 +15,7 @@ export default function Router() {
 			<Routes>
 				<Route path="" element={<Layout />}>
 					{/* Add your routes here */}
-					<Route path="" element={<MainPage />}/>
+					<Route path="/journeybuddy/oauth" element={<MainPage />}/>
 					<Route path="/community" element={<Community/>}/>
 					<Route path="/my-page" element={<MyPage/>}/>
 					<Route path='/plan' element={<Plan/>}/>

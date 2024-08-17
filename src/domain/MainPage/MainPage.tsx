@@ -1,8 +1,27 @@
 import * as S from './MainPage.styles';
 import TopPicks from './components/TopPicks';
+import { useEffect } from "react";
+import { useKakaoLogin } from "../Auth/hooks/useLogin"; 
+import { setStoredUser } from "../../utils/userStorage";
+import { useLocation } from "react-router-dom";
 
 
 export default function MainPage() {
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+    const code: string | undefined = searchParams.get("code") || undefined;
+
+    const { login, error, isLoading } = useKakaoLogin(code);
+
+	useEffect(() => {
+        if (login && login.isSuccess) {
+            setStoredUser(login.result);
+            console.log("User stored successfully:", login.result);
+        } else if (error) {
+            console.error("Login failed:", error);
+        }
+    }, [login, error]);
+
 	
 	const DestinationCardComponent = ({ destination, imageSrc } : any) => (
 		<S.DestinationCard>

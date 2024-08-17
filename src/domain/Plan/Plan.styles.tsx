@@ -67,15 +67,6 @@ export const ScheduleItemContent = styled.div`
   flex: 1;
 `;
 
-export const ScheduleItemButton = styled.button`
-  background-color: #ff69b4;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
 export const MapImage = styled.img`
   width: 100%;
   height: auto;

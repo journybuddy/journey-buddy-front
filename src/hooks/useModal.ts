@@ -16,6 +16,7 @@ export default function useModal() {
 	const [isThirdOpen, setIsThirdOpen] = useRecoilState(thirdModalState);
 	const [isConfirmOpen, setIsConfirmOpen] = useRecoilState(confirmModalState);
 	const [isInfoOpen, setIsInfoOpen] = useRecoilState(infoModalState);
+	const [isAuthOpen, setIsAuthOpen] = useRecoilState(infoModalState);
 
 	const modalOpen = useCallback(() => {
 		setIsOpen(true);
@@ -37,6 +38,10 @@ export default function useModal() {
 		setIsInfoOpen(true);
 	}, [setIsInfoOpen]);
 
+	const authModelOpen = useCallback(() => {
+		setIsAuthOpen(true);
+	}, [setIsAuthOpen]);
+
 	const onClose = useCallback(() => {
 		setIsOpen(false);
 	}, [setIsOpen]);
@@ -56,6 +61,11 @@ export default function useModal() {
 	const onInfoClose = useCallback(() => {
 		setIsInfoOpen(false);
 	}, [setIsInfoOpen]);
+
+
+	const onAuthClose = useCallback(() => {
+		setIsAuthOpen(false);
+	}, [setIsAuthOpen]);
 
 
 	return {
@@ -79,5 +89,9 @@ export default function useModal() {
 		infoModalOpen,
 		onInfoClose,
 		setIsInfoOpen,
+		authModelOpen,
+		isAuthOpen,
+		onAuthClose,
+		setIsAuthOpen,
 	};
 }

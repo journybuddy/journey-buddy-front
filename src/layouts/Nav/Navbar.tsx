@@ -10,7 +10,7 @@ export default function Navbar() {
             </S.LogoWrap>
             <S.NavItems>
                 <S.NavItemWrap
-                    to="/"
+                    to="/journeybuddy/oauth"
                     end
                     className={({ isActive }) => (isActive ? "active" : undefined)}
                 >

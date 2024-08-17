@@ -1,7 +1,28 @@
+import React from 'react';
+
+import Button from '../../components/Button';
 import * as S from './Plan.styles';
+import useModal from '../../hooks/useModal';
+import { getStoredUser } from '../../utils/userStorage';
+import LoginForm from '../Auth/component/LoginForm';
 
 export default function MyPage() {
+    const { authModelOpen } = useModal();
+
+  const user = getStoredUser();
+  console.log(user);
+  const isAuthenticated = user != null;
+
+  React.useEffect(() => {
+    if (!isAuthenticated) {
+      authModelOpen(); 
+    }
+  }, [isAuthenticated, authModelOpen]);
     return (
+        <>
+        {!isAuthenticated && (
+            <LoginForm/>
+          )}
         <S.DashboardWrap>
             <S.Sidebar>
             <h2>당신을 위한 여행 장소 </h2>
@@ -17,7 +38,7 @@ export default function MyPage() {
                             <div>Arrive in Tokyo</div>
                             <div>Narita Airport to your hotel</div>
                         </S.ScheduleItemContent>
-                        <S.ScheduleItemButton>담기</S.ScheduleItemButton>
+                        <Button btnType="primary" btnClass="btn_square">담기</Button>
                     </S.ScheduleItem>
                     <S.ScheduleItem>
                         <S.ScheduleItemImage src="https://www.tokyo-skytree.jp/kr/access/img/img_walk_map_01.jpg" alt="Arrive in Tokyo" />
@@ -25,7 +46,7 @@ export default function MyPage() {
                             <div>Arrive in Tokyo</div>
                             <div>Narita Airport to your hotel</div>
                         </S.ScheduleItemContent>
-                        <S.ScheduleItemButton>담기</S.ScheduleItemButton>
+                        <Button btnType="primary" btnClass="btn_square">담기</Button>
                     </S.ScheduleItem>
                     <S.ScheduleItem>
                         <S.ScheduleItemImage src="https://www.tokyo-skytree.jp/kr/access/img/img_walk_map_01.jpg" alt="Arrive in Tokyo" />
@@ -33,7 +54,7 @@ export default function MyPage() {
                             <div>Arrive in Tokyo</div>
                             <div>Narita Airport to your hotel</div>
                         </S.ScheduleItemContent>
-                        <S.ScheduleItemButton>담기</S.ScheduleItemButton>
+                        <Button btnType="primary" btnClass="btn_square">담기</Button>
                     </S.ScheduleItem>
                     <S.ScheduleItem>
                         <S.ScheduleItemImage src="https://www.tokyo-skytree.jp/kr/access/img/img_walk_map_01.jpg" alt="Arrive in Tokyo" />
@@ -41,7 +62,7 @@ export default function MyPage() {
                             <div>Arrive in Tokyo</div>
                             <div>Narita Airport to your hotel</div>
                         </S.ScheduleItemContent>
-                        <S.ScheduleItemButton>담기</S.ScheduleItemButton>
+                        <Button btnType="primary" btnClass="btn_square">담기</Button>
                     </S.ScheduleItem>
                 </S.Schedule>
             </S.Sidebar>
@@ -51,5 +72,6 @@ export default function MyPage() {
                 </S.MapContainer>
             </S.MainContent>
         </S.DashboardWrap>
+        </>
     );
 }

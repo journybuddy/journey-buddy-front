@@ -17,6 +17,8 @@ export const CardItem = styled.div`
 
 export const RoundedImage = styled.img`
   width: 100%;
+  height: 180px;
+  object-fit: cover;
   border-radius: 10px;
 `;
 
