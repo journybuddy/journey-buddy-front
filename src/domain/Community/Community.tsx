@@ -13,7 +13,7 @@ import { getStoredUser } from '../../utils/userStorage';
 
 export default function Community() {
   const { modalOpen, secondmodalOpen } = useModal();
-  const [searchParams, setSearchParams] = useState({});
+  const [searchParams, setSearchParams] = useState<{ location?: string; sort?: string }>({});
   const { communityList } = useCommunityList(searchParams);
   const [postId, setPostId] = useState<number>();
   const user = getStoredUser();
@@ -25,7 +25,7 @@ export default function Community() {
       setPostId(seq);
       modalOpen();
     },
-    [setPostId],
+    [setPostId, modalOpen]
   );
 
   const handleSearch = (params: { location?: string; sort?: string }) => {
@@ -38,15 +38,12 @@ export default function Community() {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} onReset={handleReset} /> 
       <S.ButtonWrapper>
         {isAuthenticated && (
           <>
             <Button btnType="primary" btnClass="btn_square" onClick={secondmodalOpen}>
               글 작성하기
-            </Button>
-            <Button btnType="report" btnClass="btn_square" onClick={handleReset}>
-              검색 초기화
             </Button>
           </>
         )}

@@ -41,6 +41,7 @@ export default function CommunityDetailModal({ postId }: IProps) {
   const { mutate: addLike } = useLikeAdd(); 
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isScrapped, setIsScrapped] = useState<boolean>(false);
+  const isAuthenticated = user != null;
 
   useEffect(() => {
     if (isOpen && communityDetail) {
@@ -127,7 +128,7 @@ export default function CommunityDetailModal({ postId }: IProps) {
         open={isOpen}
         onClose={handleClose}
         edit={isAuthorized}
-        social={!isAuthorized}
+        social={!isAuthorized && isAuthenticated}
         isLiked={isLiked}
         isScrapped={isScrapped}
         onScrapClick={isScrapped ? handleUnScrapClick : handleScrapClick} 

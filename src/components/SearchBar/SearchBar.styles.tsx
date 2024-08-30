@@ -66,3 +66,21 @@ export const SearchButton = styled.button`
     background-color: #e91e63;
   }
 `;
+
+export const ResetButton = styled.button`
+  background-color: #4caf50;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 16px;
+
+  &:hover {
+    background-color: #388e3c;
+  }
+`;

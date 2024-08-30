@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import * as S from './SearchBar.styles';
 import Select, { SingleValue } from 'react-select';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaRedoAlt } from 'react-icons/fa';
 
 interface SearchBarProps {
   onSearch: (searchParams: { location?: string; sort?: string }) => void;
+  onReset: () => void;  
 }
 
 const options = [
@@ -12,7 +13,7 @@ const options = [
   { value: 'likeCount', label: '좋아요 수' },
 ];
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onReset }) => {
   const [location, setLocation] = useState('');
   const [sort, setSort] = useState<{ value: string; label: string } | null>(options[0]);
 
@@ -22,6 +23,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   const handleSelectChange = (selectedOption: SingleValue<{ value: string; label: string }>) => {
     setSort(selectedOption);
+  };
+
+  const handleReset = () => {
+    setLocation(''); 
+    setSort(options[0]); 
+    onReset(); 
   };
 
   return (
@@ -39,7 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         <S.Label>정렬 기준</S.Label>
         <Select
           value={sort}
-          onChange={handleSelectChange} 
+          onChange={handleSelectChange}
           options={options}
           styles={{
             control: (provided) => ({
@@ -50,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
               '&:hover': {
                 borderColor: '#80bdff',
               },
-              width: '150%', 
+              width: '150%',
             }),
             option: (provided, state) => ({
               ...provided,
@@ -61,10 +68,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           }}
         />
       </S.SearchItem>
-    
+
       <S.SearchButton onClick={handleSearch}>
         <FaSearch />
       </S.SearchButton>
+
+      <S.ResetButton onClick={handleReset}>
+        <FaRedoAlt />
+      </S.ResetButton>
     </S.SearchBarContainer>
   );
 };
