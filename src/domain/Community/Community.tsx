@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import useModal from '../../hooks/useModal';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import * as S from './Community.styles';
@@ -10,6 +10,7 @@ import NoDataInfo from '../../components/NoDataInfo/NoDataInfo';
 import { defaultImage } from '../../assets/images';
 import Button from '../../components/Button';
 import { getStoredUser } from '../../utils/userStorage';
+import { useLocation } from 'react-router-dom';
 
 export default function Community() {
   const { modalOpen, secondmodalOpen } = useModal();
@@ -18,6 +19,15 @@ export default function Community() {
   const [postId, setPostId] = useState<number>();
   const user = getStoredUser();
   const isAuthenticated = user != null;
+
+  const location = useLocation();
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const loc = queryParams.get('location');
+    if (loc) {
+      setSearchParams({ location: loc });
+    }
+  }, [location]);
 
   /** 포스트 상세 조회 */
   const onOpenPost = useCallback(
@@ -38,14 +48,12 @@ export default function Community() {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} onReset={handleReset} /> 
+      <SearchBar location={searchParams.location || ''} onSearch={handleSearch} onReset={handleReset} /> 
       <S.ButtonWrapper>
         {isAuthenticated && (
-          <>
-            <Button btnType="primary" btnClass="btn_square" onClick={secondmodalOpen}>
-              글 작성하기
-            </Button>
-          </>
+          <Button btnType="primary" btnClass="btn_square" onClick={secondmodalOpen}>
+            글 작성하기
+          </Button>
         )}
       </S.ButtonWrapper>
       {communityList && communityList?.content?.length > 0 ? (
@@ -58,14 +66,14 @@ export default function Community() {
               >
                 <S.Title>{item.title}</S.Title>
                 <S.Host>{item.writerName}</S.Host>
-                {<S.Price>{`👍🏻 ${item.likeCount} 💬 ${item.commentCount}`}</S.Price>}
+                <S.Price>{`👍🏻 ${item.likeCount} 💬 ${item.commentCount}`}</S.Price>
                 {item.location && <S.Available>{item.location}</S.Available>}
               </Card>
             </S.CardItem>
           ))}
         </S.CardContainer>
       ) : (
-        <NoDataInfo text="게시물이" />
+        <NoDataInfo text="게시물이 " />
       )}
       <CommunityDetailModal postId={postId} />
     </>

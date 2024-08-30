@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from './SearchBar.styles';
 import Select, { SingleValue } from 'react-select';
 import { FaSearch, FaRedoAlt } from 'react-icons/fa';
 
 interface SearchBarProps {
+  location?: string; 
   onSearch: (searchParams: { location?: string; sort?: string }) => void;
   onReset: () => void;  
 }
@@ -13,12 +14,16 @@ const options = [
   { value: 'likeCount', label: '좋아요 수' },
 ];
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onReset }) => {
-  const [location, setLocation] = useState('');
+const SearchBar: React.FC<SearchBarProps> = ({ location, onSearch, onReset }) => {
+  const [searchLocation, setSearchLocation] = useState(location); 
   const [sort, setSort] = useState<{ value: string; label: string } | null>(options[0]);
 
+  useEffect(() => {
+    setSearchLocation(location); 
+  }, [location]);
+
   const handleSearch = () => {
-    onSearch({ location, sort: sort?.value });
+    onSearch({ location: searchLocation, sort: sort?.value });
   };
 
   const handleSelectChange = (selectedOption: SingleValue<{ value: string; label: string }>) => {
@@ -26,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onReset }) => {
   };
 
   const handleReset = () => {
-    setLocation(''); 
+    setSearchLocation(''); 
     setSort(options[0]); 
     onReset(); 
   };
@@ -36,8 +41,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onReset }) => {
       <S.SearchItem>
         <S.Label>여행지</S.Label>
         <S.Input
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          value={searchLocation}
+          onChange={(e) => setSearchLocation(e.target.value)}
           placeholder="여행지 검색"
         />
       </S.SearchItem>
