@@ -2,21 +2,24 @@ import * as S from './MainPage.styles';
 import TopPicks from './components/TopPicks';
 import { useEffect } from "react";
 import { useKakaoLogin } from "../Auth/hooks/useLogin"; 
-import { setStoredUser } from "../../utils/userStorage";
+import { setStoredUser, getStoredUser } from "../../utils/userStorage";
 import { useLocation } from "react-router-dom";
+import { useRecoilState } from 'recoil';
+import { profileUrlState } from '../../recoil/atoms/productState';
 
 
 export default function MainPage() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
     const code: string | undefined = searchParams.get("code") || undefined;
+	const [,setProfileUrl] = useRecoilState(profileUrlState);
 
-    const { login, error, isLoading } = useKakaoLogin(code);
+    const { login, error } = useKakaoLogin(code);
 
 	useEffect(() => {
-        if (login && login.isSuccess) {
-            setStoredUser(login.result);
-            console.log("User stored successfully:", login.result);
+        if (login) {
+            setStoredUser(login.userInfo, login.jwt);
+			setProfileUrl(getStoredUser()?.profile_image)
         } else if (error) {
             console.error("Login failed:", error);
         }

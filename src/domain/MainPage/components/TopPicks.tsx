@@ -32,7 +32,7 @@ export default function TopPicks() {
 				<S.TopPickInfo>
 				  <S.TopPickCategory>{pick.location}</S.TopPickCategory>
 				  <S.TopPickTitle>{pick.title}</S.TopPickTitle>
-				  <S.TopPickPrice>{pick.likeCount}</S.TopPickPrice>
+				  <S.TopPickPrice>{`👍🏻 ${pick.likeCount} 💬 ${pick.commentCount}`}</S.TopPickPrice>
 				</S.TopPickInfo>
 			  </S.TopPickCard>
 			))) : (

@@ -18,6 +18,16 @@ export const infoModalState = atom<boolean>({
 	default: false,
 });
 
+export const authModelState = atom<boolean>({
+	key: 'authModelState',
+	default: false,
+});
+
+export const logoutModelState = atom<boolean>({
+	key: 'logoutModelState',
+	default: false,
+});
+
 export const secondModalState = atom<boolean>({
 	key: 'secondModalState',
 	default: false,
@@ -30,6 +40,16 @@ export const thirdModalState = atom<boolean>({
 
 export const loginErrorMessageState = atom({
 	key: 'loginErrorMessageState',
+	default: undefined,
+});
+
+export const showState = atom<boolean>({
+	key: 'showState',
+	default: false,
+});
+
+export const profileUrlState = atom<string | undefined>({
+	key: 'profileUrlState',
 	default: undefined,
 });
 

@@ -20,8 +20,8 @@ export const deleteType = css`
 `;
 export const reportType = css`
 	color: #fff;
-	background: #f06292;
-	border: 1.5px solid #f06292;
+	background: #ff4d4d;
+	border: 1.5px solid #ff4d4d;
 `;
 export const primaryType = css`
 	color: #fff;
@@ -30,8 +30,8 @@ export const primaryType = css`
 `;
 export const editType = css`
 	color: #fff;
-	background: #f06292;
-	border: 1.5px solid #f06292;
+	background: #4CAF50;
+	border: 1.5px solid #4CAF50;
 `;
 
 export const BasicButton = styled.button<{

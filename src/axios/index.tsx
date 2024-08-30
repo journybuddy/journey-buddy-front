@@ -1,4 +1,4 @@
-import { getStoredUser } from '../utils/userStorage';
+import { getStoredToken } from '../utils/userStorage';
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
@@ -7,10 +7,10 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
-		const token = getStoredUser();
+		const token = getStoredToken();
 		if (token) {
 			config.headers = config.headers || {};
-			config.headers['Authorization'] = token;
+			config.headers['Authorization'] = "Bearer " + token;
 		}
 		return config;
 	},

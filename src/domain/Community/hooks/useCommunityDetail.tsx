@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '../../../axios';
-import { API_COMMINITY } from '../../../constants/apiList';
+import { API_COMMUNITY } from '../../../constants/apiList';
 
 const getCommunityDetail = async (postId?: number) => {
-  const { data } = await axiosInstance.get(API_COMMINITY.getCommunityDetail + postId);
+  const { data } = await axiosInstance.get(API_COMMUNITY.getCommunityDetail + postId);
   return data;
 };
 

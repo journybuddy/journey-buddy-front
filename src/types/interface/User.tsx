@@ -1,9 +1,8 @@
 export interface User {
-    // accessToken: string;
     id: number;
-    name: string;
+    nickname: string;
     email: string;
-    profileUrl: string;
-    code?: string; 
+    profile_image: string;
+    bio?: string;
   }
 export {};

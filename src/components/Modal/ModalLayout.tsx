@@ -19,6 +19,7 @@ export default function ModalLayout({
 	onClose,
 	width = '720px',
 }: IProps) {
+
 	return open ? (
 		<ModalPortal>
 			<S.ModalWrap show={show} onClick={onClose}>

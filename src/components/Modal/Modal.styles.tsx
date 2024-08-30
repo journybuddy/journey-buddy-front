@@ -7,16 +7,50 @@ export const Title = styled.h2`
   text-align: center;
 `;
 
+export const Footer = styled.div`
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-top: 20px; 
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+`;
+
+export const ImageIcon = styled.img`
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  display: inline-block;
+`;
+
+
 export const Content = styled.p`
   font-size: 16px;
   margin-bottom: 20px;
   text-align: center;
 `;
 
-export const DetailText = styled.p`
+export const DetailContainer = styled.div`
+  display: inline-block; 
+  margin-right: 3px; 
+`;
+
+export const DetailButton = styled.p`
   font-size: 14px;
-  margin-bottom: 8px;
-  text-align: left;
+  padding: 8px 12px; 
+  border-radius: 50px; 
+  background-color: rgba(200, 200, 200, 0.5); 
+  display: inline-block; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.7);
+  }
 `;
 
 export const ImageCarousel = styled.div`
@@ -25,6 +59,7 @@ export const ImageCarousel = styled.div`
   scroll-behavior: smooth;
   padding: 10px 0;
   gap: 10px;
+  align-items: center;
 
   &::-webkit-scrollbar {
     height: 8px;
@@ -42,9 +77,12 @@ export const ImageCarousel = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 100%;
+  height: 400px;
   margin-bottom: 10px;
   border-radius: 10px;
+  flex-shrink: 0; 
+  width: auto; 
+  object-fit: cover; 
 `;
 
 export const ModalWrap = styled.div<{ show?: boolean }>`
@@ -100,7 +138,6 @@ export const ModalContent = styled.div`
 		font-weight: 500;
 		line-height: 1.4;
 		color: gray;
-		padding-bottom: 30px;
 		padding-top: 10px;
 		text-align: center;
 	}
@@ -136,10 +173,18 @@ export const ModalButtons = styled.div`
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	margin-top: 30px;
 	&.info-modal-button {
 		justify-content: flex-end;
 	}
+`;
+
+export const ChildrenContainer = styled.div`
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  width: 70%; 
+  margin: 0 auto; 
+  padding: 0 10px; 
 `;
 
 export const Arrange = styled.div`

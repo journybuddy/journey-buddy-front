@@ -4,20 +4,28 @@ import Button from "../../../components/Button";
 import ModalLayout from "../../../components/Modal/ModalLayout";
 import useModal from "../../../hooks/useModal";
 import * as S from '../Auth.styles';
+import { profileUrlState, showState } from "../../../recoil/atoms/productState";
+import { useRecoilState } from "recoil";
 
 export default function LoginForm() {
-    const { isAuthOpen } = useModal();
-    const location = useLocation();
+    const { isAuthOpen, onAuthClose } = useModal();
+    const [show] = useRecoilState(showState);
 
     const handleClick = () => {
-        const REDIRECT_URI = 'http://localhost:3000/journeybuddy/oauth';
-        const CLIENT_ID = "3ca10b8a1bcbd4d9809b2c1b8169aacf";
-        const href = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+        const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
+        const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+        const href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
         window.location.href = href; 
     };
 
+    const handleClose = () => {
+        if (show === false) {
+            onAuthClose();
+        }
+    };
+
     return (
-        <ModalLayout show={true} open={isAuthOpen}>
+        <ModalLayout show={show !== false ? show : false} open={isAuthOpen} onClose={handleClose}>
             <S.LoginContainer>
                 <S.LoginIcon>
                     <JourneyBuddyIcon />

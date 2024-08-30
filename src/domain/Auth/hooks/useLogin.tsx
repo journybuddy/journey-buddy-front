@@ -3,7 +3,6 @@ import { axiosInstance } from '../../../axios';
 import { API_LOGIN } from '../../../constants/apiList';
 
 const getKakaoLogin = async (code?: string) => {
-    console.log(code);
   const { data } = await axiosInstance.post(
     `${API_LOGIN.getKakaoLogin}?&code=${code}`,
     );

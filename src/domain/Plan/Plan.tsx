@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Button from '../../components/Button';
 import * as S from './Plan.styles';
 import useModal from '../../hooks/useModal';
 import { getStoredUser } from '../../utils/userStorage';
 import LoginForm from '../Auth/component/LoginForm';
+import { useRecoilState } from 'recoil';
+import { showState } from '../../recoil/atoms/productState';
 
 export default function MyPage() {
     const { authModelOpen } = useModal();
+    const [, setShow] = useRecoilState(showState);
 
   const user = getStoredUser();
-  console.log(user);
   const isAuthenticated = user != null;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isAuthenticated) {
+      setShow(true);
       authModelOpen(); 
     }
   }, [isAuthenticated, authModelOpen]);

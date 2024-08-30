@@ -116,6 +116,8 @@ export const Gallery = styled.div`
 
 export const GalleryImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 200px; 
+  object-fit: cover;
   border-radius: 10px;
+  cursor: pointer;
 `;

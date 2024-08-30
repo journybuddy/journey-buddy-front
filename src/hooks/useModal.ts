@@ -8,6 +8,7 @@ import {
 	infoModalState,
 	secondModalState,
 	thirdModalState,
+	authModelState,
 } from 'src/recoil/atoms/productState';
 
 export default function useModal() {
@@ -16,7 +17,7 @@ export default function useModal() {
 	const [isThirdOpen, setIsThirdOpen] = useRecoilState(thirdModalState);
 	const [isConfirmOpen, setIsConfirmOpen] = useRecoilState(confirmModalState);
 	const [isInfoOpen, setIsInfoOpen] = useRecoilState(infoModalState);
-	const [isAuthOpen, setIsAuthOpen] = useRecoilState(infoModalState);
+	const [isAuthOpen, setIsAuthOpen] = useRecoilState(authModelState);
 
 	const modalOpen = useCallback(() => {
 		setIsOpen(true);

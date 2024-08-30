@@ -15,9 +15,28 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'], 
   },
   module: {
-    loaders: [
-      // Typescript
+    rules: [
       { test: /\.tsx?$/, loader: "ts-loader" },
+
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader', 
+          'css-loader',  
+          {
+            loader: 'less-loader', 
+            options: {
+              lessOptions: {
+                modifyVars: {
+                  'input-border-radius': '8px',
+                  'input-border-color': '#f06292',
+                },
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
     ],
   },
 };
