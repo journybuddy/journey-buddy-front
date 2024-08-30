@@ -155,7 +155,7 @@ export default function CommunityDetailModal({ postId }: IProps) {
                 <S.CommentDate>{new Date(comment.createdAt).toLocaleString()}</S.CommentDate>
               </S.Comment>
             ))}
-            <S.AddCommentSection>
+            {isAuthenticated && <S.AddCommentSection>
               <S.ProfilePicWrap  profileUrl={profileUrl}> {!profileUrl && <S.StyledAvatar icon={<PersonIcon />} />}</S.ProfilePicWrap>
               <S.CommentInput 
                 placeholder="댓글을 입력하세요..." 
@@ -165,7 +165,7 @@ export default function CommunityDetailModal({ postId }: IProps) {
               <Button btnType="edit" btnClass="btn_square" onClick={handleAddComment}>
                 추가
               </Button>
-            </S.AddCommentSection>
+            </S.AddCommentSection>}
           </S.CommentsSection>
         )}
       />
