@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Button from '../../components/Button';
 import * as S from './Plan.styles';
 import useModal from '../../hooks/useModal';
 import { getStoredUser } from '../../utils/userStorage';

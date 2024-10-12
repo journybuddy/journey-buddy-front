@@ -178,11 +178,11 @@ export const ModalButtons = styled.div`
 	}
 `;
 
-export const ChildrenContainer = styled.div`
+export const ChildrenContainer = styled.div<{ width?: string }>`
   display: flex;
   flex-direction: column; 
   justify-content: center; 
-  width: 70%; 
+  width:   ${({ width }) => (width ? '100%' : '70%' )};
   margin: 0 auto; 
   padding: 0 10px; 
 `;

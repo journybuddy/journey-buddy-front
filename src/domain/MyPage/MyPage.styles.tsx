@@ -1,5 +1,31 @@
 import styled from '@emotion/styled';
 
+export const List = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+export const ListItem = styled.li`
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+`;
+
+export const ListTitle = styled.h3`
+  margin: 0;
+  font-size: 1.2em;
+`;
+
+export const ListInfo = styled.p`
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 0.9em;
+`;
 
 export const DashboardWrap = styled.div`
   display: flex;

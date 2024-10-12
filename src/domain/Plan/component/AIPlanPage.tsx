@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as S from '../Plan.styles';
 import { SyncLoader } from 'react-spinners';
 import Button from '../../../components/Button/Button';
@@ -10,7 +9,6 @@ import { TourInfo } from '../../../types/interface/TourInfo';
 import NoDataInfo from '../../../components/NoDataInfo/NoDataInfo';
 
 export const AIPlanPage: React.FC = () => {
-  const navigate = useNavigate();
 
   const [preference, setPreference] = useState('');
   const [places, setPlaces] = useState<TourInfo[]>([]);

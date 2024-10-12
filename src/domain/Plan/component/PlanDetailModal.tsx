@@ -7,22 +7,34 @@ import { SyncLoader } from 'react-spinners';
 import { TourInfo } from '../../../types/interface/TourInfo';
 import NoDataInfo from '../../../components/NoDataInfo/NoDataInfo';
 import { usePlanSave } from '../hooks/usePlanSave';
+import Modal from '../../../components/Modal/Modal';
+import useModal from '../../../hooks/useModal';
+import { usePlanDetail } from '../hooks/usePlanDetail';
 
 const KAKAO_APP_KEY = 'cd866a457c717cac35fd4372f0e43a7a';
 
-export const FinalPlanPage: React.FC = () => {
-  const [schedule] = useRecoilState(scheduleState);
+interface IProps {
+    planId?: number;
+  }
+
+export default function PlanDetailModal({ planId }: IProps) {
+  const { isFouthOpen, onFourthClose, setIsFourthOpen } = useModal();
   const [groupedSchedules, setGroupedSchedules] = useState<{ [key: string]: TourInfo[] }>({});
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [tripName, setTripName] = useState<string>(''); 
   const mapRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<any[]>([]);
-  const { mutate: savePlan } = usePlanSave(); 
-  const [isSaved,setIsSaved] = useRecoilState(isSavedState);
+  const { planDetail, isLoading, error } = usePlanDetail(planId);
 
   useEffect(() => {
-    if (schedule?.schedules?.length) {
-      const grouped = schedule.schedules.reduce((acc: any, schedule: any) => {
+    if (planDetail) {
+      console.log('Plan Detail:', planDetail);  // PlanDetail 출력
+    }
+  }, [planDetail]);
+
+  useEffect(() => {
+    if (planDetail?.schedules?.length) {
+      const grouped = planDetail.schedules.reduce((acc: any, schedule: any) => {
         const dateTime = schedule.dateTime;
         const date = Array.isArray(dateTime)
           ? `${dateTime[0]}-${String(dateTime[1]).padStart(2, '0')}-${String(dateTime[2]).padStart(2, '0')}`
@@ -43,7 +55,7 @@ export const FinalPlanPage: React.FC = () => {
         setSelectedDate(firstDate);
       }
     } 
-  }, [schedule]);
+  }, [planDetail]); 
 
   useEffect(() => {
     const loadKakaoMap = () => {
@@ -107,40 +119,19 @@ export const FinalPlanPage: React.FC = () => {
     loadKakaoMap();
   }, [selectedDate, groupedSchedules]);
 
-  const handleSavePlan = async () => {
-    const updatedSchedule = {
-      ...schedule,
-      planName: tripName,  
-    };
-
-    savePlan(updatedSchedule, {
-      onSuccess: () => {
-        console.log("isSucceed");
-        setIsSaved(true); 
-      },
-    });
-    
-  };
 
   return (
     <>
-    { !isSaved ? 
-     (<S.TripNameInput 
-            type="text"
-            placeholder="여행 이름을 입력하세요"
-            value={tripName}
-            onChange={(e) => setTripName(e.target.value)}
-          />) : (
-            <h1 style={{ marginLeft: '40px' }}>{'🚎 ' + tripName}</h1>
-          )
-    }
+    <Modal
+    open={isFouthOpen}
+    onClose={onFourthClose}
+    width='1200px'
+    >
+    <h1 style={{ marginLeft: '40px' }}>{'🚎 ' + planDetail?.name}</h1>
     <S.DashboardWrap>
       <S.PageWrapper>
         <S.Header>
-          <h2>🎒 최종 여행 계획</h2>
-          <Button btnType="primary" btnClass="btn_square" onClick={handleSavePlan}>
-            여행 계획 저장
-          </Button>
+          <h2>🎒 여행 계획</h2>
         </S.Header>
 
         <S.Schedule height="587px">
@@ -181,7 +172,7 @@ export const FinalPlanPage: React.FC = () => {
         <S.MapContainer ref={mapRef} />
       </S.PageWrapper>
     </S.DashboardWrap>
+    </Modal>
     </>
   );
-
 };

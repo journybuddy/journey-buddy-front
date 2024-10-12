@@ -41,7 +41,7 @@ export default function Modal({
         {title && <p className="modal-title">{title}</p>}
         {subtitle && <p className="modal-sub-title">{subtitle}</p>}
       </div>
-      <S.ChildrenContainer>
+      <S.ChildrenContainer width={width}>
         {children}
       </S.ChildrenContainer>
       { button && <S.ModalButtons>

@@ -88,16 +88,6 @@ export const PlanModalWrap = styled.div`
   z-index: 999;
 `;
 
-export const PlanModalContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-`;
-
 export const PlanModalInner = styled.div`
   display: flex;
   flex-direction: column;

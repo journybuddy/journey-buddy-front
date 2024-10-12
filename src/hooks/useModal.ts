@@ -8,6 +8,7 @@ import {
 	infoModalState,
 	secondModalState,
 	thirdModalState,
+	fourthModalState,
 	authModelState,
 } from 'src/recoil/atoms/productState';
 
@@ -15,6 +16,7 @@ export default function useModal() {
 	const [isOpen, setIsOpen] = useRecoilState(modalState);
 	const [isSecondOpen, setIsSecondOpen] = useRecoilState(secondModalState);
 	const [isThirdOpen, setIsThirdOpen] = useRecoilState(thirdModalState);
+	const [isFouthOpen, setIsFourthOpen] = useRecoilState(fourthModalState);
 	const [isConfirmOpen, setIsConfirmOpen] = useRecoilState(confirmModalState);
 	const [isInfoOpen, setIsInfoOpen] = useRecoilState(infoModalState);
 	const [isAuthOpen, setIsAuthOpen] = useRecoilState(authModelState);
@@ -30,6 +32,11 @@ export default function useModal() {
 	const thirdmodalOpen = useCallback(() => {
 		setIsThirdOpen(true);
 	}, [setIsThirdOpen]);
+
+	const fourthmodalOpen = useCallback(() => {
+		setIsFourthOpen(true);
+	}, [setIsFourthOpen]);
+
 
 	const confirmModalOpen = useCallback(() => {
 		setIsConfirmOpen(true);
@@ -58,6 +65,10 @@ export default function useModal() {
 	const onThirdClose = useCallback(() => {
 		setIsThirdOpen(false);
 	}, [setIsThirdOpen]);
+
+	const onFourthClose = useCallback(() => {
+		setIsFourthOpen(false);
+	}, [setIsFourthOpen]);
 
 	const onInfoClose = useCallback(() => {
 		setIsInfoOpen(false);
@@ -94,5 +105,9 @@ export default function useModal() {
 		isAuthOpen,
 		onAuthClose,
 		setIsAuthOpen,
+		isFouthOpen,
+		setIsFourthOpen,
+		onFourthClose,
+		fourthmodalOpen
 	};
 }

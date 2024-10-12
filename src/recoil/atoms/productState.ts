@@ -41,6 +41,11 @@ export const thirdModalState = atom<boolean>({
 	default: false,
 });
 
+export const fourthModalState = atom<boolean>({
+	key: 'fourthModalState',
+	default: false,
+});
+
 export const loginErrorMessageState = atom({
 	key: 'loginErrorMessageState',
 	default: undefined,
