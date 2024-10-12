@@ -13,6 +13,7 @@ export default function MainPage() {
 	const searchParams = new URLSearchParams(location.search);
     const code: string | undefined = searchParams.get("code") || undefined;
 	const [,setProfileUrl] = useRecoilState(profileUrlState);
+	const navigate = useNavigate(); 
 
     const { login, error } = useKakaoLogin(code);
 
@@ -51,8 +52,10 @@ export default function MainPage() {
 				<input type="text" placeholder="My Location" />
 				<input type="date" placeholder="Start Date" />
 				<input type="number" placeholder="People" />
-				<S.BannerButton>Discover</S.BannerButton>
-			</S.SearchBarWrap>
+				<S.BannerButton onClick={() => {console.log("clicked"); navigate('/plan')}}>
+					Discover
+				</S.BannerButton>
+				</S.SearchBarWrap>
 			</S.BannerContent>
 			<S.BannerBackgroundContainer>
     <S.BannerBackground />

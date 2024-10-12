@@ -47,18 +47,30 @@ max-width: 50%;
 `;
 
 export const BannerButton = styled.button`
-background-color: #f06292;
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-font-size: 1rem;
-cursor: pointer;
-transition: background-color 0.3s ease;
+  background-color: #f06292;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block; 
+  width: auto;
+  text-align: center;
+  z-index: 2;
+  
+  &:hover {
+    background-color: #e91e63;
+  }
 
-&:hover {
-	background-color: #e91e63;
-}
+  &:active {
+    outline: none; 
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 
