@@ -6,10 +6,11 @@ import Button from '../../../components/Button/Button';
 import { SyncLoader } from 'react-spinners';
 import { TourInfo } from '../../../types/interface/TourInfo';
 import NoDataInfo from '../../../components/NoDataInfo/NoDataInfo';
-import { usePlanSave } from '../hooks/usePlanSave';
 import Modal from '../../../components/Modal/Modal';
 import useModal from '../../../hooks/useModal';
 import { usePlanDetail } from '../hooks/usePlanDetail';
+import { usePlanDelete } from '../hooks/usePlanDelete';
+import ConfirmModal from '../../../components/Modal/ConfirmModal';
 
 const KAKAO_APP_KEY = 'cd866a457c717cac35fd4372f0e43a7a';
 
@@ -18,19 +19,15 @@ interface IProps {
   }
 
 export default function PlanDetailModal({ planId }: IProps) {
-  const { isFouthOpen, onFourthClose, setIsFourthOpen } = useModal();
+  const { isFouthOpen, onFourthClose, setIsFourthOpen, confirmModalOpen, isConfirmOpen, onConfirmClose } = useModal();
   const [groupedSchedules, setGroupedSchedules] = useState<{ [key: string]: TourInfo[] }>({});
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [tripName, setTripName] = useState<string>(''); 
   const mapRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<any[]>([]);
   const { planDetail, isLoading, error } = usePlanDetail(planId);
+  const { mutate: deletePlan } = usePlanDelete();  
 
-  useEffect(() => {
-    if (planDetail) {
-      console.log('Plan Detail:', planDetail);  // PlanDetail 출력
-    }
-  }, [planDetail]);
 
   useEffect(() => {
     if (planDetail?.schedules?.length) {
@@ -119,6 +116,18 @@ export default function PlanDetailModal({ planId }: IProps) {
     loadKakaoMap();
   }, [selectedDate, groupedSchedules]);
 
+  const handleDelete = () => {
+    if (planId) {
+      deletePlan(planId, {
+        onSuccess: () => {
+          onFourthClose();
+        },
+        onError: (error) => {
+          console.error('Failed to delete post:', error);
+        }
+      });
+    }
+  };
 
   return (
     <>
@@ -126,6 +135,8 @@ export default function PlanDetailModal({ planId }: IProps) {
     open={isFouthOpen}
     onClose={onFourthClose}
     width='1200px'
+    okText='삭제'
+    onOk={confirmModalOpen}
     >
     <h1 style={{ marginLeft: '40px' }}>{'🚎 ' + planDetail?.name}</h1>
     <S.DashboardWrap>
@@ -173,6 +184,13 @@ export default function PlanDetailModal({ planId }: IProps) {
       </S.PageWrapper>
     </S.DashboardWrap>
     </Modal>
+    <ConfirmModal
+        title="삭제 하시겠습니까?"
+        okText="삭제"
+        open={isConfirmOpen}
+        onClose={onConfirmClose}
+        onOk={handleDelete}
+      />
     </>
   );
 };

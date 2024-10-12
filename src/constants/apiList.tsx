@@ -40,4 +40,5 @@ export const API_PLAN = {
     createAIPlan: '/plans/start-ai',
     savePlan: '/plans/save',
     getPlanDetail: '/plans/plan-info/',
+    deletePlan: '/plans/',
   };
