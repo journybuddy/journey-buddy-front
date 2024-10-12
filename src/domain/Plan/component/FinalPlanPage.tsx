@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useRecoilState } from 'recoil';
-import { planState, scheduleState } from '../../../recoil/atoms/productState';
+import { isSavedState, planState, scheduleState } from '../../../recoil/atoms/productState';
 import * as S from '../Plan.styles';
 import Button from '../../../components/Button/Button';
 import { SyncLoader } from 'react-spinners';
@@ -14,10 +14,11 @@ export const FinalPlanPage: React.FC = () => {
   const [schedule] = useRecoilState(scheduleState);
   const [groupedSchedules, setGroupedSchedules] = useState<{ [key: string]: TourInfo[] }>({});
   const [selectedDate, setSelectedDate] = useState<string>('');
-  const [tripName, setTripName] = useState<string>(''); // 여행 이름 상태 관리
+  const [tripName, setTripName] = useState<string>(''); 
   const mapRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<any[]>([]);
   const { mutate: savePlan } = usePlanSave(); 
+  const [,setIsSaved] = useRecoilState(isSavedState);
 
   useEffect(() => {
     if (schedule?.schedules?.length) {
@@ -41,7 +42,7 @@ export const FinalPlanPage: React.FC = () => {
       if (firstDate) {
         setSelectedDate(firstDate);
       }
-    }
+    } 
   }, [schedule]);
 
   useEffect(() => {
@@ -107,13 +108,17 @@ export const FinalPlanPage: React.FC = () => {
   }, [selectedDate, groupedSchedules]);
 
   const handleSavePlan = async () => {
-    console.log('여행 이름:', tripName);
     const updatedSchedule = {
       ...schedule,
       planName: tripName,  
     };
-  
-    savePlan(updatedSchedule);
+
+    savePlan(updatedSchedule, {
+      onSuccess: () => {
+        console.log("isSucceed");
+        setIsSaved(true); 
+      },
+    });
     
   };
 

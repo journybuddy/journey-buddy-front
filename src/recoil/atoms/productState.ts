@@ -71,9 +71,13 @@ export const createdState = atom<boolean>({
 	default: false,
   });
 
-  export const scheduleState = atom<ScheduleInfo | undefined>({
+export const scheduleState = atom<ScheduleInfo | undefined>({
 	key: 'scheduleState',
 	default: undefined,
   });
 
+export const isSavedState = atom<boolean>({
+	key: 'isSavedState',
+	default: true,
+  });
 

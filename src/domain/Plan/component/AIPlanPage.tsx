@@ -5,7 +5,7 @@ import { SyncLoader } from 'react-spinners';
 import Button from '../../../components/Button/Button';
 import { useTourInfo } from '../hooks';
 import { useRecoilState } from "recoil";
-import { planState, placeState } from '../../../recoil/atoms/productState';
+import { planState, placeState, isSavedState } from '../../../recoil/atoms/productState';
 import { TourInfo } from '../../../types/interface/TourInfo';
 import NoDataInfo from '../../../components/NoDataInfo/NoDataInfo';
 
@@ -17,13 +17,18 @@ export const AIPlanPage: React.FC = () => {
   const [, setSelectedPlaces] = useRecoilState(placeState); 
   const [activeTab, setActiveTab] = useState('문화시설'); 
   const [plan, ] = useRecoilState(planState);
+  const [,setIsSaved] = useRecoilState(isSavedState);
 
   const { tourInfoData, isLoading: isTourInfoLoading } = useTourInfo(plan?.areaCode, plan?.sigunguCode, preference);
 
   useEffect(() => {
     if (tourInfoData && tourInfoData.tourInfoList) {
       setPlaces(tourInfoData.tourInfoList);
-    }
+    } 
+    if(places?.length === 0)
+      setIsSaved(true)
+    else
+      setIsSaved(false)
   }, [tourInfoData]);
 
   const handleAddToPlan = (place: TourInfo) => {

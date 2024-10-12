@@ -5,7 +5,7 @@ import useModal from '../../hooks/useModal';
 import { getStoredUser } from '../../utils/userStorage';
 import LoginForm from '../Auth/component/LoginForm';
 import { useRecoilState } from 'recoil';
-import { createdState, showState } from '../../recoil/atoms/productState';
+import { createdState, isSavedState, showState } from '../../recoil/atoms/productState';
 import { PlanModal } from './component/PlanModal';
 import { AIPlanPage  } from './component/AIPlanPage';
 import { MyPlanPage } from './component/MyPlanPage';
@@ -15,11 +15,13 @@ export default function Plan() {
     const { authModelOpen, thirdmodalOpen } = useModal();
     const [, setShow] = useRecoilState(showState);
     const [created,] = useRecoilState(createdState); 
+    const [isSaved,] = useRecoilState(isSavedState); 
 
     const user = getStoredUser();
     const isAuthenticated = user != null;
 
     useEffect(() => {
+        console.log("isSaved:", isSaved);
         if (!isAuthenticated) {
             setShow(true);
             authModelOpen(); 
@@ -42,7 +44,7 @@ export default function Plan() {
             ( 
                 <FinalPlanPage/>
             )}
-            {isAuthenticated && <PlanModal />}
+            {isAuthenticated && isSaved && <PlanModal />}
         </>
     );
 }
