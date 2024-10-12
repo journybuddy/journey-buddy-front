@@ -16,11 +16,11 @@ export const SearchBarContainer = styled.div`
 
 export const SearchItem = styled.div`
   display: flex;
-  flex-direction: row;  /* 요소를 가로로 정렬 */
-  align-items: center;  /* 수직으로 가운데 정렬 */
+  flex-direction: row;  
+  align-items: center; 
   padding: 0 16px;
   text-align: center;
-  justify-content: center; /* 수평으로 가운데 정렬 */
+  justify-content: center; 
   flex: 1;
   border-right: 1px solid #ddd;
 
@@ -32,7 +32,7 @@ export const SearchItem = styled.div`
 export const Label = styled.label`
   font-size: 14px;
   font-weight: bold;
-  margin-right: 10px; /* Label과 Select 간의 간격을 유지 */
+  margin-right: 10px; 
 `;
 
 export const Input = styled.input`

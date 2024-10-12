@@ -1,5 +1,8 @@
 import { atom } from 'recoil';
 import dayjs from 'dayjs';
+import { PlanData } from '@/types/interface/PlanData';
+import { TourInfo } from '../../types/interface/TourInfo';
+import { ScheduleInfo } from '@/types/interface/ScheduleInfo';
 
 
 /** 모달 온/오프 상태 */
@@ -52,4 +55,25 @@ export const profileUrlState = atom<string | undefined>({
 	key: 'profileUrlState',
 	default: undefined,
 });
+
+export const planState = atom<PlanData | undefined>({
+	key: 'planState',
+	default: undefined
+})
+
+export const placeState = atom<TourInfo[]>({
+	key: 'placeState',
+	default: [],
+  });
+
+export const createdState = atom<boolean>({
+	key: 'createdState',
+	default: false,
+  });
+
+  export const scheduleState = atom<ScheduleInfo | undefined>({
+	key: 'scheduleState',
+	default: undefined,
+  });
+
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as S from './SearchBar.styles';
 import Select, { SingleValue } from 'react-select';
 import { FaSearch, FaRedoAlt } from 'react-icons/fa';
+import { selectStyles } from '../../styles/selectStyles';
 
 interface SearchBarProps {
   location?: string; 
@@ -53,24 +54,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ location, onSearch, onReset }) =>
           value={sort}
           onChange={handleSelectChange}
           options={options}
-          styles={{
-            control: (provided) => ({
-              ...provided,
-              borderColor: '#ced4da',
-              borderRadius: '4px',
-              boxShadow: 'none',
-              '&:hover': {
-                borderColor: '#80bdff',
-              },
-              width: '150%',
-            }),
-            option: (provided, state) => ({
-              ...provided,
-              backgroundColor: state.isFocused ? '#f0f0f0' : '#fff',
-              color: '#333',
-              cursor: 'pointer',
-            }),
-          }}
+          styles={selectStyles}
         />
       </S.SearchItem>
 

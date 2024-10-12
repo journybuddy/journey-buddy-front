@@ -5,13 +5,17 @@ import * as S from './NoDataInfo.styles';
 
 interface IProps {
 	text?: string;
+	height?: string;
 }
 
-export default function NoDataInfo({ text }: IProps) {
+export default function NoDataInfo({ text, height }: IProps) {
 	return (
-		<S.NoData>
+		<S.NoData height={height}>
 			<SmileOutlined />
-			<p>{`등록된 ${text} 없습니다.`}</p>
+			{text ? 
+			(<p>{`등록된 ${text} 없습니다.`}</p>) :
+			<p>{`필요한 장소를 검색하세요.`}</p>
+		}
 		</S.NoData>
 	);
 }

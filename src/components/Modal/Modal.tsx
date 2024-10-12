@@ -15,6 +15,8 @@ interface IProps {
   okText?: string;
   cancleText?: string;
   disabled?: boolean;
+  button?: boolean;
+  show?: boolean;
 }
 
 export default function Modal({
@@ -28,11 +30,13 @@ export default function Modal({
   okText,
   cancleText,
   disabled = false,
+  button = true,
+  show,
 }: IProps) {
   const { t } = useTranslation('index');
   
   return (
-    <ModalLayout onClose={onClose} open={open} width={width}>
+    <ModalLayout onClose={onClose} open={open} width={width} show={show}>
       <div style={{ paddingBottom: '30px' }}>
         {title && <p className="modal-title">{title}</p>}
         {subtitle && <p className="modal-sub-title">{subtitle}</p>}
@@ -40,12 +44,12 @@ export default function Modal({
       <S.ChildrenContainer>
         {children}
       </S.ChildrenContainer>
-      <S.ModalButtons>
+      { button && <S.ModalButtons>
         <Button btnType="primary" onClick={onOk} disabled={disabled}>
           {t(okText ? okText : '등록')}
         </Button>
         <Button onClick={onClose}>{t(cancleText ? cancleText : '취소')}</Button>
-      </S.ModalButtons>
+      </S.ModalButtons> }
     </ModalLayout>
   );
 }

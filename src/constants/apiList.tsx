@@ -28,3 +28,14 @@ export const API_MY_PAGE = {
     getMyComments : '/my_page/comment/myComment',
     editProfile: '/user/update',
 }
+
+/** PLAN */
+export const API_PLAN = {
+    getProvinces: '/plans/provinces',
+    getCities: (provinceCode: string) => `/plans/cities/${provinceCode}`,
+    getTourInfo: (areaCode?: string, sigunguCode?: string, preference?: string) => 
+      `/plans/tour-info?areaCode=${areaCode}&sigunguCode=${sigunguCode}&preference=${preference}`,
+    searchPlace: (keyword: string) => `/plans/search?keyword=${keyword}`,
+    createAIPlan: '/plans/start-ai',
+    savePlan: '/plans/save',
+  };
