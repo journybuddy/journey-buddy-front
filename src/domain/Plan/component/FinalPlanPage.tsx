@@ -19,7 +19,7 @@ export const FinalPlanPage: React.FC = () => {
   const [highlightedMarker, setHighlightedMarker] = useState<any>(null); // 강조된 마커
   const mapInstanceRef = useRef<any>(null);
   const { mutate: savePlan } = usePlanSave(); 
-  const [, setIsSaved] = useRecoilState(isSavedState);
+  const [isSaved, setIsSaved] = useRecoilState(isSavedState);
 
   useEffect(() => {
     if (schedule?.schedules?.length) {
@@ -160,13 +160,14 @@ export const FinalPlanPage: React.FC = () => {
   };
 
   return (
-    <>
+    <>{ !isSaved ? 
       <S.TripNameInput 
         type="text"
         placeholder="여행 이름을 입력하세요"
         value={tripName}
         onChange={(e) => setTripName(e.target.value)}
-      />
+      /> :  <h1 style={{ marginLeft: '40px' }}>{'🚎 ' + tripName}</h1>
+    }
       <S.DashboardWrap>
         <S.PageWrapper>
           <S.Header>
